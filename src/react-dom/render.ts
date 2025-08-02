@@ -1,8 +1,8 @@
 export default function render(
     element: HTMLElement,
     parent?: HTMLElement
-) {
-    if (typeof parent === 'undefined')
+): void {
+    if (!parent)
         document.body.appendChild(element)
     else
         parent.appendChild(element)

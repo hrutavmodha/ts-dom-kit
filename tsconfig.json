@@ -8,9 +8,9 @@
             "DOM",
             "DOM.Iterable"
         ],
-        "jsx": "react",
-        "jsxFactory": "createElement",
-        "jsxFragmentFactory": "Fragment",
+        "jsx": "react-jsx",
+        "baseUrl": ".",
+        "jsxImportSource": "../..",
         "skipLibCheck": true,
         "moduleResolution": "node",
         "esModuleInterop": true,

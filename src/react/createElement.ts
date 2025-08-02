@@ -1,18 +1,11 @@
-export default function createElement(
-    tag: string,
-    props?: { [key: string]: any },
-    ...children: any
-): HTMLElement {
-    const element = document.createElement(tag)
-    for (let key in props) {
-        if (key.startsWith('on'))
-            element.addEventListener(key.substring(2), props[key])
-        else if (key == 'style')
-            element.style = props[key]
-        else
-            element.setAttribute(key, props[key])
-    }
-    children.forEach((child: any) => {
+function handleChildren(
+    children: any,
+    element: HTMLElement
+): void {
+    if (!children)
+        return
+    const nodes = Array.isArray(children) ? children : [children]
+    nodes.forEach((child: any) => {
         if (
             typeof child === 'string' ||
             typeof child === 'number'
@@ -28,5 +21,20 @@ export default function createElement(
             element.appendChild(node)
         }
     })
+}
+export function createElement(
+    tag: string,
+    props?: { [key: string]: any }
+): HTMLElement {
+    const element = document.createElement(tag)
+    for (let key in props) {
+        if (key.startsWith('on'))
+            element.addEventListener(key.substring(2), props[key])
+        if (key == 'style')
+            element.style = props[key]
+        if (key == 'children') {
+            handleChildren(props[key], element)
+        }
+    }
     return element
 }

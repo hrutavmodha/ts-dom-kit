@@ -1,7 +1,7 @@
 {
     "name": "react",
     "private": true,
-    "version": "0.0.0",
+    "version": "1.0.0",
     "type": "module",
     "scripts": {
         "start": "vite",
@@ -9,6 +9,7 @@
         "preview": "vite preview"
     },
     "devDependencies": {
+        "path": "^0.12.7",
         "typescript": "~5.8.3",
         "vite": "^7.0.4"
     }
