@@ -23,18 +23,27 @@ function handleChildren(
     })
 }
 export function createElement(
-    tag: string,
+    tag: any,
     props?: { [key: string]: any }
-): HTMLElement {
+): any {
+    if (typeof tag === 'function')
+        return tag(props)
     const element = document.createElement(tag)
     for (let key in props) {
         if (key.startsWith('on'))
             element.addEventListener(key.substring(2), props[key])
-        if (key == 'style')
+        else if (key == 'style')
             element.style = props[key]
-        if (key == 'children') {
+        else if (key == 'children')
             handleChildren(props[key], element)
-        }
+        else
+            element.setAttribute(key, props[key])
     }
+    let vdom = JSON.stringify({
+        // @ts-ignore
+        tag,
+        ...props
+    })
+    console.log('VDOM is:\n', vdom)
     return element
 }

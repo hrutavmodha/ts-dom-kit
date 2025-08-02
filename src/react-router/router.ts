@@ -1,4 +1,4 @@
-import root from '..'
+import root from '../index'
 let routes: { [key: string]: () => HTMLElement } = {}
 export function setRoutes(
     mapper: { [key: string]: () => HTMLElement }

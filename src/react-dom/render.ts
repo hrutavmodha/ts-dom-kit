@@ -1,9 +1,16 @@
+import { resetCursor } from '../react/dispatcher'
+import { setGlobalRender } from './rerenderer'
 export default function render(
-    element: HTMLElement,
+    element: Function,
     parent?: HTMLElement
 ): void {
-    if (!parent)
-        document.body.appendChild(element)
-    else
-        parent.appendChild(element)
+    const doRender = () => {
+        resetCursor()
+        if (parent !== undefined) {
+            parent.innerHTML = ''
+            parent.appendChild(element())
+        }
+    }
+    setGlobalRender(doRender)
+    doRender()
 }
